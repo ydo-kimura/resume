@@ -1,0 +1,12 @@
+{
+  "yaml.schemas": {
+    "src/schemas/resume.schema.json": "_data/resume.yaml"
+  },
+  "[html]": {
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "never",
+      "source.fixAll.eslint": "never"
+    }
+  }
+}

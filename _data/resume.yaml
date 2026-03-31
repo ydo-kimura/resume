@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=../src/schemas/resume.schema.json
+#
+# スキーマ（人間向け）:
+# - meta: title（<title>）, page_title（h1）
+# - basic_info.rows: type が name | birth_date | text | experience | certifications（birth_date は birth_date: YYYY-MM-DD）
+#   certifications は certifications[].title（必須）と certifications[].acquired_at（任意: yyyy/m or yyyy/mm）
+#   certifications 行は show_other: true で末尾に「他」を表示（other_title で文言変更可）
+# - work_history.companies: name, period_html（<br> 等は HTML 断片、|safe）
+#   projects[]: start/end（yyyy/m または yyyy/mm）, role, tasks[], environment[], summary?
+meta:
+  title: "職務経歴書 山田太郎"
+  page_title: "職務経歴書"
+
+basic_info:
+  rows:
+    - type: name
+      label: 氏名
+      family: 山田
+      given: 太郎
+    - type: birth_date
+      label: 生年月日
+      birth_date: "1995-04-01"
+    - type: text
+      label: 最終学歴
+      academic_background: "首都大学東京 システムデザイン学部 2018年卒"
+    - type: experience
+      label: 経験職種
+      experiences:
+        - job: バックエンドエンジニア
+          duration: 4年
+        - job: フロントエンドエンジニア
+          duration: 3年
+        - job: フルスタックエンジニア
+          duration: 2年
+    - type: certifications
+      label: 資格
+      show_other: true
+      certifications:
+        - title: 基本情報技術者試験
+          acquired_at: "2017/10"
+        - title: 応用情報技術者試験
+          acquired_at: "2019/4"
+        - title: AWS Certified Solutions Architect Associate
+          acquired_at: "2023/3"
+
+work_history:
+  companies:
+    - name: "株式会社サンプルテック / ソフトウェアエンジニア"
+      period_html: "2018年4月〜在職中"
+      projects:
+        - title: "SaaS型タスク管理ツール 開発"
+          summary: |
+            中小企業向けのチームタスク管理SaaSの新規開発。
+          start: 2023/4
+          role: フルスタックエンジニア
+          tasks:
+            - 要件定義、画面設計、API設計
+            - React / TypeScript を用いたフロントエンド実装
+            - Node.js / PostgreSQL を用いたAPI・バッチ処理実装
+          environment:
+            - React、TypeScript、Node.js、PostgreSQL
+            - "[AWS] ECS、RDS (PostgreSQL)、S3、CloudFront"
+        - title: "ECサイト基盤 リプレース"
+          summary: |
+            既存オンプレミスECサイトのクラウド移行およびリプレース。
+          start: 2021/1
+          end: 2023/3
+          role: バックエンドエンジニア
+          tasks:
+            - 既存システムの調査、データ移行計画の策定
+            - REST API・バッチ処理の設計・実装
+            - パフォーマンスチューニング、障害対応
+          environment:
+            - Java、Spring Boot、MySQL
+            - "[AWS] EC2、RDS (MySQL)、S3、CloudWatch"
+        - title: "社内業務システム 開発・保守"
+          summary: |
+            勤怠管理・経費精算などの社内業務システムの機能追加・保守。
+          start: 2018/4
+          end: 2020/12
+          role: アプリケーションエンジニア
+          tasks:
+            - 画面・帳票の改修、問い合わせ対応
+            - SQLチューニング、運用改善の提案
+          environment:
+            - C#、.NET、SQL Server
+
+footer:
+  show_omit: false

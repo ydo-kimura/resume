@@ -1,0 +1,353 @@
+:root {
+  --font-family:
+    "Noto Sans CJK JP", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Yu Gothic", "YuGothic", "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+  --font-size-body: 13px;
+  --font-size-company: 15px;
+  --font-size-project: 14px;
+  --font-size-h2: 18px;
+  --font-size-h3: 14px;
+  --font-size-h1: 24px;
+  --line-height-body: 1.65;
+  --line-height-tight: 1.45;
+
+  --color-bg: #f2f3f5;
+  --color-paper: #ffffff;
+  --color-text: #111111;
+  --color-muted: #4a4a4a;
+  --color-border: #5c5c5c;
+  --color-border-soft: #c6c6c6;
+  --color-company-header-border: #000000;
+  --color-heading-bg: #ececec;
+
+  --page-width: 210mm;
+  --page-padding-y: 14mm;
+  --page-padding-x: 14mm;
+  --screen-margin-y: 20px;
+  --screen-margin-x: 12px;
+
+  --section-gap: 14px;
+  --content-gap: 10px;
+  --title-gap: 12px;
+  --print-page-padding-top: 6mm;
+  --print-title-gap: 8px;
+  --row-gap: 8px;
+  --project-gap: 10px;
+  --project-padding: 9px;
+  --half-char-gap: 0.5em;
+  --one-char-gap: 1em;
+
+  --table-th-width: 26%;
+  --table-cell-padding-y: 8px;
+  --table-cell-padding-x: 10px;
+
+  --heading-border-size: 1px;
+  --paper-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.page {
+  width: min(100%, var(--page-width));
+  margin: var(--screen-margin-y) auto;
+  padding: var(--page-padding-y) var(--page-padding-x);
+  background: var(--color-paper);
+  box-shadow: var(--paper-shadow);
+}
+
+.section {
+  margin: 0;
+}
+
+.section + .section {
+  margin-top: var(--section-gap);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h2 {
+  margin-bottom: var(--content-gap);
+  padding: 6px 10px;
+  border: var(--heading-border-size) solid var(--color-border);
+  background: var(--color-heading-bg);
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+}
+
+.page-title {
+  margin-bottom: var(--title-gap);
+  text-align: center;
+  font-size: var(--font-size-h1);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+}
+
+.output-date {
+  margin-bottom: 4px;
+  text-align: right;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+h3 {
+  margin-top: 2px;
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  color: var(--color-muted);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--color-border);
+  table-layout: fixed;
+}
+
+th,
+td {
+  border: 1px solid var(--color-border);
+  padding: var(--table-cell-padding-y) var(--table-cell-padding-x);
+  vertical-align: top;
+}
+
+th {
+  width: var(--table-th-width);
+  background: var(--color-heading-bg);
+  font-weight: 700;
+  text-align: left;
+}
+
+.list-lines p + p {
+  margin-top: var(--row-gap);
+}
+
+.line-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.line-inline p {
+  line-height: var(--line-height-tight);
+}
+
+.name-inline {
+  justify-content: flex-start;
+  gap: 1em;
+}
+
+.certification-line {
+  align-items: flex-start;
+}
+
+.certification-title {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.certification-acquired-at {
+  flex: 0 0 7.5em;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.history-block + .history-block {
+  margin-top: 12px;
+}
+
+.company {
+  border: 1px solid var(--color-border);
+  padding: var(--project-padding);
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.company + .company {
+  margin-top: var(--project-gap);
+}
+
+.company-header {
+  margin: calc(-1 * var(--project-padding)) calc(-1 * var(--project-padding)) 0;
+  padding: var(--project-padding) var(--project-padding) 6px;
+  border-bottom: 1px solid var(--color-company-header-border);
+  font-size: var(--font-size-company);
+  font-weight: 700;
+}
+
+.project {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.company-header + .project {
+  padding-top: calc(8px + var(--half-char-gap));
+}
+
+.project + .project {
+  margin-top: calc(var(--project-gap) + var(--half-char-gap));
+  padding-top: calc(var(--project-gap) + var(--half-char-gap));
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.project-title {
+  font-size: var(--font-size-project);
+  font-weight: 700;
+}
+
+.project > .line-inline {
+  margin-bottom: var(--one-char-gap);
+}
+
+.project-detail {
+  margin-top: 0;
+}
+
+.project-summary {
+  white-space: pre-line;
+  margin-left: 1em;
+  margin-bottom: 1em;
+}
+
+.project-role {
+  margin-top: 4px;
+}
+
+.project-role-title {
+  font-weight: 700;
+}
+
+.project-role-body {
+  margin-top: 2px;
+  margin-left: 1em;
+}
+
+.project-section {
+  margin-top: 4px;
+}
+
+.project-section-title {
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.project-list {
+  margin: 0 0 0 2em;
+  padding-left: 0;
+}
+
+.project-list li + li {
+  margin-top: 2px;
+}
+
+.project-detail-legacy {
+  margin-top: 4px;
+  white-space: pre-line;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 0.5in 0;
+}
+
+@media (max-width: 900px) {
+  body {
+    padding: 0 var(--screen-margin-x);
+  }
+
+  .page {
+    margin: 10px auto;
+  }
+
+  .line-inline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}
+
+@media print {
+  html,
+  body {
+    font-family:
+      "Noto Sans CJK JP",
+      "Noto Sans JP",
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      "Yu Gothic",
+      "YuGothic",
+      "Hiragino Kaku Gothic ProN",
+      "Meiryo",
+      sans-serif;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 0.5in 0;
+  }
+
+  html,
+  body {
+    background: #fff;
+  }
+
+  .page {
+    width: var(--page-width);
+    margin: 0;
+    padding-top: var(--print-page-padding-top);
+    box-shadow: none;
+  }
+
+  .page-title {
+    margin-bottom: var(--print-title-gap);
+  }
+
+  .line-inline {
+    flex-direction: row !important;
+    align-items: baseline !important;
+  }
+
+  .company-header > p {
+    white-space: nowrap;
+  }
+
+  .company {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .project {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .section[aria-labelledby="work-history"] > h2 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+}
