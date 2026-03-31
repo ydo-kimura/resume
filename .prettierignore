@@ -1,0 +1,20 @@
+# 依存関係・ロックファイル
+node_modules/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# ビルド成果物
+dist/
+
+# ツールのキャッシュ・生成物
+.pnpm-store/
+coverage/
+.nyc_output/
+*.tsbuildinfo
+.cache/
+.parcel-cache/
+.vite/
+
+# 縮小済み（手で編集しない）
+*.min.*

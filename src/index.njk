@@ -1,0 +1,141 @@
+---
+permalink: index.html
+---
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ resume.meta.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/resume.css">
+</head>
+
+<body>
+    <main class="page">
+        <p class="output-date">{{ "" | todayJp }}</p>
+        <h1 class="page-title">{{ resume.meta.page_title }}</h1>
+        <section class="section" aria-labelledby="basic-info">
+            <h2 id="basic-info">基本情報</h2>
+            <table>
+                <tbody>
+                    {% for row in resume.basic_info.rows %}
+                    <tr>
+                        <th>{{ row.label }}</th>
+                        <td{% if row.type == 'certifications' or row.type == 'experience' %} class="list-lines"{% endif %}>
+                            {% if row.type == 'name' %}
+                            <div class="line-inline name-inline">
+                                <p>{{ row.family }}</p>
+                                <p>{{ row.given }}</p>
+                            </div>
+                            {% elif row.type == 'birth_date' %}
+                            <p>{{ row.birth_date | birthDateJp }}</p>
+                            {% elif row.type == 'text' %}
+                            <p>{{ row.academic_background }}</p>
+                            {% elif row.type == 'experience' %}
+                            {% for item in row.experiences %}
+                            <div class="line-inline">
+                                <p>{{ item.job }}</p>
+                                <p>{{ item.duration }}</p>
+                            </div>
+                            {% endfor %}
+                            {% elif row.type == 'certifications' %}
+                            {% for item in row.certifications %}
+                            <div class="line-inline certification-line">
+                                <p class="certification-title">{{ item.title }}</p>
+                                <p class="certification-acquired-at">{% if item.acquired_at %}{{ item.acquired_at | yearMonthJp }}{% else %}&nbsp;{% endif %}</p>
+                            </div>
+                            {% endfor %}
+                            {% if row.show_other %}
+                            <div class="line-inline certification-line">
+                                <p class="certification-title">{{ row.other_title or '他' }}</p>
+                                <p class="certification-acquired-at">&nbsp;</p>
+                            </div>
+                            {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <section class="section" aria-labelledby="work-history">
+            <h2 id="work-history">職務経歴</h2>
+
+            {% for company in resume.work_history.companies %}
+            <article class="company">
+                <header class="company-header line-inline">
+                    <p>{{ company.name }}</p>
+                    <p>{{ company.period_html | safe }}</p>
+                </header>
+
+                {% for project in company.projects %}
+                <section class="project">
+                    {% set summary = (project.summary or '') | trim %}
+                    {% set role = (project.role or '') | trim %}
+                    {% set start = (project.start or '') | trim %}
+                    {% set end = (project.end or '') | trim %}
+                    <div class="line-inline">
+                        <p class="project-title">{{ project.title }}</p>
+                        <p>{{ start | yearMonthJp }}〜{% if end %}{{ end | yearMonthJp }}{% else %}継続中{% endif %}</p>
+                    </div>
+                    <div class="project-detail">
+                        {# 概要（任意） #}
+                        {% if summary %}<p class="project-summary">{{ summary }}</p>{% endif %}
+
+                        {# 役割（必須想定だが、データ移行中は存在チェック） #}
+                        {% if role %}
+                        <div class="project-role">
+                            <p class="project-role-title">【役割】</p>
+                            <p class="project-role-body">{{ role }}</p>
+                        </div>
+                        {% endif %}
+
+                        {# 担当業務リスト #}
+                        {% if project.tasks %}
+                        <div class="project-section">
+                            <p class="project-section-title">【担当業務】</p>
+                            <ul class="project-list">
+                                {% for task in project.tasks %}
+                                <li>{{ task | trim }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        {# 環境・言語リスト #}
+                        {% if project.environment %}
+                        <div class="project-section">
+                            <p class="project-section-title">【環境・言語】</p>
+                            <ul class="project-list">
+                                {% for env in project.environment %}
+                                <li>{{ env | trim }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        {# フォールバック: まだ移行していないデータ用に旧 detail をそのまま表示 #}
+                        {% if (not summary and not role and not project.tasks and not project.environment) and project.detail %}
+                        <p class="project-detail-legacy">
+                            {{ project.detail }}
+                        </p>
+                        {% endif %}
+                    </div>
+                </section>
+                {% endfor %}
+            </article>
+            {% endfor %}
+
+            {% if resume.footer and resume.footer.show_omit %}
+            <section class="section">
+                <br>
+                <h3>以下、省略</h3>
+            </section>
+            {% endif %}
+        </section>
+    </main>
+</body>
+
+</html>
