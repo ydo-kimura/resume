@@ -4,15 +4,11 @@
     "dockerfile": "Dockerfile",
     "context": "..",
     "args": {
-      "VARIANT": "24-bookworm",
-      "NODE_VERSION": "24",
-      "TZ": "Asia/Tokyo"
+      "VARIANT": "24.14-bookworm-slim"
     }
   },
-  "features": {
-    "ghcr.io/devcontainers-extra/features/pnpm:2": {
-      "version": "latest"
-    }
+  "containerEnv": {
+    "TZ": "Asia/Tokyo"
   },
   "customizations": {
     "vscode": {
@@ -65,6 +61,7 @@
       }
     }
   },
+  "initializeCommand": "bash .devcontainer/initialize-command.sh",
   "postCreateCommand": "bash .devcontainer/post-create-command.sh",
   "remoteUser": "node"
 }
