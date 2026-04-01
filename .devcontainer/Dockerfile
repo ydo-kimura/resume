@@ -8,8 +8,9 @@ RUN apt-get update \
  && apt-get install -y --no-install-recommends \
       bash \
       tzdata \
-      ca-certificates \
       curl \
+      ca-certificates \
+      openssh-client \
       git \
       vim \
       fonts-noto-cjk \
@@ -18,6 +19,5 @@ RUN apt-get update \
  && npm install -g playwright \
  && playwright install-deps chromium
 
-# ブラウザ本体は node ユーザーのキャッシュに入れる
-USER node
-RUN playwright install chromium
+ USER node
+ 

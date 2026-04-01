@@ -7,7 +7,7 @@ echo "Installing dependencies..."
 pnpm install --frozen-lockfile
 
 echo
-echo "Installing Playwright Chromium (skipped in image build for Alpine reliability)..."
+echo "Installing Playwright Chromium..."
 pnpm exec playwright install chromium
 
 echo
